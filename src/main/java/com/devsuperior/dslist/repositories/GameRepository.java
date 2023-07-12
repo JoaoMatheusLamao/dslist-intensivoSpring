@@ -1,6 +1,7 @@
 package com.devsuperior.dslist.repositories;
 
 import com.devsuperior.dslist.projection.GameMinProjection;
+import com.devsuperior.dslist.projection.GameProjection;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.devsuperior.dslist.entities.Game;
@@ -19,5 +20,13 @@ public interface GameRepository extends JpaRepository<Game, Long> {
 		ORDER BY tb_belonging.position
 			""")
 	List<GameMinProjection> searchByList(Long listId);
+
+	@Query(nativeQuery = true, value = """
+		SELECT tb_game.id, tb_game.title, tb_game.game_year AS `year`, tb_game.img_url AS imgUrl,
+		tb_game.short_description AS shortDescription
+		FROM tb_game
+		WHERE tb_game.title = :title
+			""")
+	GameProjection searchByTitle(String title);
 	
 }

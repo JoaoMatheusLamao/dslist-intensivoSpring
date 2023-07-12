@@ -36,4 +36,9 @@ public class GameController {
 		GameDTO result = gameService.findById(id);
 		return result;
 	}
+
+	@GetMapping(value = "/title={title}")
+	public GameDTO findByTitle(@PathVariable String title){
+		return gameService.findByTitle(title);
+	}
 }

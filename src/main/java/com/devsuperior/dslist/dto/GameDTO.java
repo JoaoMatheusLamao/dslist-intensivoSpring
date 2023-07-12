@@ -1,6 +1,7 @@
 package com.devsuperior.dslist.dto;
 
 import com.devsuperior.dslist.entities.Game;
+import com.devsuperior.dslist.projection.GameProjection;
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,6 +21,10 @@ public class GameDTO {
 
     public GameDTO(Game entity) {
         BeanUtils.copyProperties(entity, this);
+    }
+
+    public GameDTO(GameProjection x) {
+        BeanUtils.copyProperties(x, this);
     }
 
     public Long getId() {
